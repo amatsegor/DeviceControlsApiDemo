@@ -149,9 +149,11 @@ class CustomDeviceControlService: ControlsProviderService() {
             0f,
             100f,
             state.floatValue,
-            10f,
+            0.1f,
             null
         )
+
+        val controlButton = ControlButton(true, "brightness")
 
         return Control.StatefulBuilder(DIMMABLE_BULB_CONTROL_ID, intent)
             .setTitle("Dimmable bulb")
@@ -160,9 +162,8 @@ class CustomDeviceControlService: ControlsProviderService() {
             .setStructure("Sample Home")
             .setDeviceType(DeviceTypes.TYPE_LIGHT)
             .setStatus(Control.STATUS_OK)
-            .setStatusText("${state.floatValue.toInt()}%")
-            .setControlTemplate(ToggleRangeTemplate(DIMMABLE_BULB_CONTROL_RANGE_TEMPLATE_ID, state.booleanValue, "On/Off", rangeTemplate))
-            .setCustomColor(ColorStateList.valueOf(Color.parseColor("#303744")))
+            .setControlTemplate(ToggleRangeTemplate(DIMMABLE_BULB_CONTROL_RANGE_TEMPLATE_ID, controlButton, rangeTemplate))
+            .setCustomColor(ColorStateList.valueOf(0xff413C2D.toInt()))
             .build()
     }
 
